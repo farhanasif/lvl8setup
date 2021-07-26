@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -34,8 +36,26 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        // $this->reportable(function (Throwable $e) {
+        //     //
+        // });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+       if ($request->expectsJson()){
+           return response()->json(['error'=>'Unauthenticate'],422);
+       }
+       //ata oi je login krete je error hobe tai that means je prodhom login krte jabe aijonno 0
+       $guards=array_get($exception->guards(),0);
+       $url="";
+       if ($guards=='system_admin'){
+           $url="/";
+       }
+       // }else{
+       //     $url="/user/login";
+       // }
+
+       return redirect()->guest(url($url));
     }
 }
