@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'system_admin' => [
+            'driver' => 'session',
+            'provider' => 'system_admins',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -71,6 +76,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'system_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -98,6 +107,12 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+
+        'system_admins' => [
+            'provider' => 'system_admins',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 
