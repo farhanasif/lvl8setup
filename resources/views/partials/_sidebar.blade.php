@@ -36,9 +36,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('all.register.user')}}" class="nav-link">
               <i class="nav-icon fas fa-user text-green"></i>
-            <p>My Customers</p>
+            <p>My User</p>
           </a>
         </li>
       </ul>
